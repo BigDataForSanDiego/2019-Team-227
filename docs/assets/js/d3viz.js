@@ -26,7 +26,7 @@ function init(){
         
         var path = d3.geoPath()
           .projection(projection);
-        
+    
         // Set svg width & height
         var svg = d3.select('svg#map')
           .attr('width', width)
@@ -52,6 +52,9 @@ function init(){
      
         var mapLayer = g.append('g')
           .classed('map-layer', true);
+
+        var transitLayer = g.append('g')
+          .classed('transit-layer', true);
 
         // Define color scale
         var color = d3.scaleLinear()
@@ -161,6 +164,21 @@ function init(){
               }) 
 
         });
+
+        var transit_stops = d3.json('transit_stops_datasd.geojson');
+        transit_stops.then(function(stopData) {
+            var stops = stopData.features;
+            console.log("Loaded " + stops.length +" stops"); 
+            transitLayer.selectAll('circle')
+                .data(stops)
+                .enter().append('circle')
+                .attr('cx',function(d){ return projection(d.geometry.coordinates)[0]; })
+                .attr('cy',function(d){ return projection(d.geometry.coordinates)[1]; })
+                .attr('fill','yellow')
+                .attr('opacity',0.5)
+                .attr('stroke','none')
+                .attr('r','0.25')
+        })
 
         return g;
     } 
