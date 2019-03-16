@@ -128,7 +128,9 @@ function init(){
         console.log("loading data");
         var tracts = d3.json('census_tracts.json');
         tracts.then(function(mapData) {
-          var features = mapData.features;
+          var features =_.filter(mapData.features,function(d){
+                return d.properties.GEOID != "06073990100" && d.properties.GEOID != "06073009902";
+            })
           _.each(features,function(d){
             d.properties.area =  path.area(d);
             d.properties.density = d.properties.total_pop / path.area(d);
@@ -168,6 +170,7 @@ function init(){
         var transit_stops = d3.json('transit_stops_datasd.geojson');
         transit_stops.then(function(stopData) {
             var stops = stopData.features;
+            
             console.log("Loaded " + stops.length +" stops"); 
             transitLayer.selectAll('circle')
                 .data(stops)
