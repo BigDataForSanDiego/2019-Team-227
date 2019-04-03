@@ -12,7 +12,8 @@ Our first step will be to put together a map to help us understand how the aging
 
 Our transit scores were generously provided by bulk API access from:
 
-<a href="https://www.walkscore.com"/><img src="https://cdn2.walk.sc/2/images/walk-score-x2.png" alt="Walkscore" /></a>
+<img src="https://cdn2.walk.sc/2/images/walk-score-x2.png" alt="Walkscore" />
+[Walkscore.com](https://www.walkscore.com/)
 
 The target will be to display this data [on an interactive map](d3data.html).
 
